@@ -1,0 +1,137 @@
+@import "partials/functions";
+@import "partials/variables";
+@import "partials/mixins";
+
+@include fancy-links;
+
+@include google-font("Alegreya+Sans");
+@include google-font("Titillium+Web"); 
+
+%highlight {
+  font-style: italic;
+}
+
+.sub-title {
+  @extend %highlight;
+  @extend .foo!optional;
+  font-size: em(20px);
+}
+
+body {
+  font-family: $text-font;
+  font-size: em(18px);
+  color: $text-color;
+  background-color: $body-background-color;
+
+  @include large-screens {
+    font-size: 125%;
+  }
+}
+
+h1, h2, h3, h4 {
+  font-family: $headline-font;
+}
+
+h2 {
+  @include large-text;
+}
+
+p {
+  font-family: $text-font;
+}
+
+a {
+ color: $link-color;
+ &:hover{
+  color: darken($link-color, 15%)
+ }
+}
+ 
+.warning-button {
+  @include warning;
+  padding: 8px 12px;
+}
+
+@include apply-in-ie-6 {
+  body {
+    margin: 0px;
+    padding: 0px;
+  }
+}
+
+.cta-button {
+  @extend .warning-button;
+  @include rounded;
+  font-weight: bold;
+}
+
+#header {
+  @include box($radius: 20px,$border: 1px solid white);
+  @include box-shadow(2px 0px 4px #999, 1px 1px 6px $secondary-color);
+  height: $header-height;
+  background-color: $theme-color;
+
+  #main-menu {
+    li {
+      display: inline;
+    }
+    a {
+      color: $menu-item-color;
+      padding: 6px 8px;
+      border-bottom: 1px  solid transparentize($color: #fefefe, $amount: 1);
+      transition: border-bottom 0.5s;
+      transition-timing-function: ease-in-out;
+      &:hover {
+        border-bottom: 1px  solid opacify($color: #fefefe, $amount: .5);
+      }
+    }
+  }
+  
+  #logo {
+
+  }
+}
+
+#main {
+  width: $content-width;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include large-screens {
+    width: auto;
+    max-width: $content-width;
+  }
+
+  #content {
+    float: left;
+    width: 6*$col;
+  }
+
+  #sidebar {
+    float: right;
+    width: 2*$col;
+
+    li {
+      list-style-type: none;
+      padding: em(16px) em(20px);
+      border-bottom: 1px dashed #999;
+
+      &:hover {
+        @if $theme == Dark {
+          background-color: #42424a;
+        } @else if $theme == Light {
+          color: white;
+          background-color: #372a27;
+        } @else {
+          background-color: #efefef;
+        }
+      }
+    }
+  }
+}
+
+#footer {
+  clear: both;
+  height: $footer-height;
+  background-color: $ternary-color;
+}

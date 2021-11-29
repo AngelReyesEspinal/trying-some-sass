@@ -1,0 +1,81 @@
+@mixin tiny-screens() {
+  @media only screen and (max-width: 320px) {
+    @content;
+  }
+}
+
+@mixin small-screens() {
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin medium-screens() {
+  @media only screen and (max-width: 680px) {
+    @content;
+  }
+}
+
+@mixin large-screens() {
+  @media only screen and (max-width: 960px) {
+    @content;
+  }
+}
+
+@mixin warning {
+  background-color: orange;
+  color: white;
+
+  transition: background-color 0.5s;
+  transition-timing-function: ease-in-out;
+
+  &:hover {
+    @if $theme == Dark {
+      background-color: darken(orange, 10%);
+    } @else {
+      background-color: lighten(orange, 10%);
+    }
+    
+    cursor: pointer;
+  }
+}
+
+@mixin apply-in-ie-6 {
+  * html {
+    @content;
+  }
+}
+
+@mixin google-font($font) {
+  $font: unquote($font);
+  @import url(https://fonts.googleapis.com/css?family=#{$font});
+}
+
+@mixin box-shadow($shadows...) {
+  box-shadow: $shadows;
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+}
+
+@mixin large-text {
+  font: {
+    size: 22px;
+    weight: bold;
+  }
+}
+
+@mixin rounded($radius: 6px) {
+  border-radius: $radius;
+}
+
+@mixin box($radius: 6px, $border: 1px solid black) {
+  @include rounded($radius);
+  border: $border;
+}
+
+@mixin fancy-links {
+  a {
+    font-style: italic;
+    text-decoration: none;
+  }
+}
